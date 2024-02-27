@@ -1,0 +1,1 @@
+When I switched to Ubuntu I couldn't live without the mouse forward and backwards fixes, so I reprogrammed it in Python. It required using sockets to network the timers, but it works. I stopped using Ubuntu when flashing my BIOS corrupted it, so YMMV. 
