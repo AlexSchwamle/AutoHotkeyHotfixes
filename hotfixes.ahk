@@ -1,4 +1,6 @@
-﻿mouseBackSafetyTrigger := false
+﻿
+
+mouseBackSafetyTrigger := false
 mouseForwardSafetyTrigger := false 
 isInFastRewindMode := false 
 
@@ -74,7 +76,13 @@ typeURL(url) {
     sleep 100
     send %url%
     send {enter}
-    sleep 1000
+}
+
+clickAbsoluteThenWindow(x, y, windowX, windowY, numClicks, speed) {
+    CoordMode, Mouse, Screen 
+    MouseClick, Left, x, y, 1, 5
+    CoordMode, Mouse, Window
+    MouseClick, Left, windowX, windowY, numClicks, speed
 }
 
 #+D::
@@ -86,16 +94,14 @@ typeURL(url) {
     WinMove, -1650, 200
     WinMaximize
     typeURL("blackscreen.app")
-    MouseClick, Left, 905, 571, 2, 5
 
     openBrowser("brave")
     WinWait New Tab - Brave
     WinActivate
     WinRestore
-    WinMove,,, -700, -1000, 800, 600
+    WinMove,,, -640, -850, 800, 600
     WinMaximize
     typeURL("blackscreen.app")
-    MouseClick, Left, 905, 571, 2, 5
 
     openBrowser("msedge")
     WinWait, ahk_exe msedge.exe
@@ -104,10 +110,14 @@ typeURL(url) {
     WinMove, 300, 200
     WinMaximize
     typeURL("onlineclock.net")
-    MouseClick, Left, 641, 584,1,20
-    MouseClick, Left, 61, 127,1,20
-    MouseClick, Left, 239, 127,1,20
-    MouseClick, Left, 959, 512,1,20
+    
+    clickAbsoluteThenWindow(-1650, 200, 905, 571, 2, 10)
+    clickAbsoluteThenWindow(-640, -850, 905, 571, 2, 10)
+
+    clickAbsoluteThenWindow(300, 200, 641, 584, 1, 10)
+    MouseClick, Left, 61, 127,1,10
+    MouseClick, Left, 239, 127,1,10
+    MouseClick, Left, 959, 512,1,10
 return 
 
 ~F5::
