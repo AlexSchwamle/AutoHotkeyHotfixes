@@ -111,13 +111,13 @@ clickAbsoluteThenWindow(x, y, windowX, windowY, numClicks, speed) {
     WinMaximize
     typeURL("onlineclock.net")
     
-    clickAbsoluteThenWindow(-1650, 200, 905, 571, 2, 10)
-    clickAbsoluteThenWindow(-640, -850, 905, 571, 2, 10)
+    clickAbsoluteThenWindow(-1650, 200, 905, 571, 2, 2)
+    clickAbsoluteThenWindow(-640, -850, 905, 571, 2, 2)
 
-    clickAbsoluteThenWindow(300, 200, 641, 584, 1, 10)
-    MouseClick, Left, 61, 127,1,10
-    MouseClick, Left, 239, 127,1,10
-    MouseClick, Left, 959, 512,1,10
+    clickAbsoluteThenWindow(300, 200, 641, 584, 1, 2)
+    MouseClick, Left, 61, 127,1,2
+    MouseClick, Left, 239, 127,1,2
+    MouseClick, Left, 959, 512,1,2
 return 
 
 ~F5::
