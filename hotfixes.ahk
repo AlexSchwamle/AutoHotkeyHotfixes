@@ -117,7 +117,7 @@ clickAbsoluteThenWindow(x, y, windowX, windowY, numClicks, speed) {
     clickAbsoluteThenWindow(300, 200, 641, 584, 1, 2)
     MouseClick, Left, 61, 127,1,2
     MouseClick, Left, 239, 127,1,2
-    MouseClick, Left, 959, 512,1,2
+    MouseClick, Left, 959, 520,1,2
 return 
 
 ~F5::
