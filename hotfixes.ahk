@@ -1,8 +1,8 @@
-﻿
-
-mouseBackSafetyTrigger := false
+﻿mouseBackSafetyTrigger := false
 mouseForwardSafetyTrigger := false 
 isInFastRewindMode := false 
+
+; todo - set pixel coords etc to ini https://www.autohotkey.com/docs/v1/lib/IniRead.htm
 
 setMouseBackSafetyToFalse:
     mouseBackSafetyTrigger := false 
@@ -114,10 +114,18 @@ clickAbsoluteThenWindow(x, y, windowX, windowY, numClicks, speed) {
     clickAbsoluteThenWindow(-1650, 200, 905, 571, 2, 2)
     clickAbsoluteThenWindow(-640, -850, 905, 571, 2, 2)
 
-    clickAbsoluteThenWindow(300, 200, 641, 584, 1, 2)
+    ; additional check because edge asks to be the default browser intermittently
+    clickAbsoluteThenWindow(300, 200, 300, 200, 1, 0)
+    PixelGetColor, blueSetAsDefaultPixelColor, 1667, 144
+    if (blueSetAsDefaultPixelColor = 0x006CBE) {
+        MouseClick, Left, 1813, 133
+        sleep 100
+    }
+
+    clickAbsoluteThenWindow(300, 200, 644, 621, 1, 2)
     MouseClick, Left, 61, 127,1,2
     MouseClick, Left, 239, 127,1,2
-    MouseClick, Left, 959, 520,1,2
+    MouseClick, Left, 958, 557,1,2
 return 
 
 ~F5::
