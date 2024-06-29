@@ -64,7 +64,6 @@ return
 #+D::
     ; Requires https://github.com/AlexSchwamle/PythonBlackMonitorClock
     IniRead, repoPath, config.ini, BlackMonitorConfig, BlackMonitorPythonPath
-    msgbox %repoPath%
     run, python %repoPath%
 return 
 
