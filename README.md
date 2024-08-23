@@ -12,5 +12,5 @@ I would recommend putting a shortcut to the ahk in the shell:startup folder so i
 - If you press either of these two combinations it will turn your monitors off like sleep mode, but it will not put your computer to sleep.
     - Right arrow + Numpad enter
     - Windows key + alt + s
-- I use a triangular monitor setup + a TV, so I like to set my 3 monitors to a black background. [So I wrote a Python script to do that reliably, this hotkey requires installing that.](https://github.com/AlexSchwamle/PythonBlackMonitorClock) Make sure you set config.ini to have the path to Main.py wherever you install it.
+- I use a triple monitor setup + a TV, so I like to set my 3 monitors to a black background. [So I wrote a Python script to do that reliably, this hotkey requires installing that.](https://github.com/AlexSchwamle/PythonBlackMonitorClock) Make sure you set config.ini to have the path to Main.py wherever you install it.
     - Windows key + Shift + D
