@@ -70,3 +70,12 @@ return
 ~F5::
     Reload
 Return
+
+; Allow quick fullscreen in SumatraPDF without keyboard via middle click 
+mouseIsOver(WinTitle) {
+    MouseGetPos, , , WinID
+    return WinExist(WinTitle . " ahk_id " . WinID)
+}
+#If mouseIsOver("ahk_exe SumatraPDF.exe")
+    MButton::F11
+#If
