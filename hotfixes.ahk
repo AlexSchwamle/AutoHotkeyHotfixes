@@ -73,11 +73,14 @@ Return
 
 ; Allow quick fullscreen in SumatraPDF without keyboard via middle click 
 shouldEnableFullscreenMacro() {
-    if !WinActive("ahk_exe SumatraPDF.exe")
+    if (!WinActive("ahk_exe SumatraPDF.exe"))
         return false
 
-    MouseGetPos, , , WinID
-    return WinExist("ahk_exe SumatraPDF.exe ahk_id " . WinID)
+    MouseGetPos, curX, curY, WinID
+    if (curY < 80) ; to still allow closing book tabs with middle click 
+        return false 
+        
+    return WinExist("ahk_exe SumatraPDF.exe ahk_id " . WinID) ; to allow middle clicking taskbars / other windows 
 }
 #If shouldEnableFullscreenMacro()
     MButton::F11
