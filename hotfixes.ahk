@@ -10,7 +10,26 @@ mouseBackSafetyTrigger := false
 mouseForwardSafetyTrigger := false 
 isInFastRewindMode := false 
 
+IniRead, longStripReaderTitle, config.ini, LongReaderConfig, LongReaderTitle
+
 ; todo - set pixel coords etc to ini https://www.autohotkey.com/docs/v1/lib/IniRead.htm
+
+nudgeMouse() {
+    ; Move the mouse all cardinal directions to ensure the mouse cursor moves to trigger the mousemove event for my other scripts (see https://github.com/AlexSchwamle/QOLUserscripts/ auto hide cursor)
+    ; right
+    MouseMove, 10, 0, 10, R
+    MouseMove, -10, 0, 10, R
+    ; left 
+    MouseMove, -10, 0, 10, R
+    MouseMove, 10, 0, 10, R
+    ; down 
+    MouseMove, 0, 10, 10, R
+    MouseMove, 0, -10, 10, R
+    ; up 
+    MouseMove, 0, -10, 10, R
+    MouseMove, 0, 10, 10, R
+}
+
 ; ==============================================================================
 ; Combined Mouse Chording (XButton1 + XButton2 = Move Window to Next Monitor)
 ; ==============================================================================
@@ -43,6 +62,11 @@ setMouseForwardSafetyToFalse:
         send {Left}
     } else if (!isInFastRewindMode) {
         send {Right}
+        WinGetTitle, curWindowTitle, A
+        if (InStr(curWindowTitle, longStripReaderTitle)) {
+            sleep, 2000
+            nudgeMouse()
+        }
     }
 
     if (mouse4State = "U") {
