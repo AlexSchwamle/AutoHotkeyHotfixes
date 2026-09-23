@@ -1,8 +1,35 @@
-﻿mouseBackSafetyTrigger := false
+﻿; Need admin mode to send Win+Shift+Right to move windows across elevated programs like on screen keyboard 
+if !A_IsAdmin
+{
+    MsgBox, 48, Must Run As Admin, Hotfixes.ahk must be ran as an admin to move elevated programs. Attempting to automatically do it now.
+    Run *RunAs "%A_AhkPath%" "%A_ScriptFullPath%"
+    ExitApp
+}
+
+mouseBackSafetyTrigger := false
 mouseForwardSafetyTrigger := false 
 isInFastRewindMode := false 
 
 ; todo - set pixel coords etc to ini https://www.autohotkey.com/docs/v1/lib/IniRead.htm
+; ==============================================================================
+; Combined Mouse Chording (XButton1 + XButton2 = Move Window to Next Monitor)
+; ==============================================================================
+
+moveUnderCursorOrActiveWindow() {
+    ; Cancel any pending solo timers immediately
+    SetTimer setMouseForwardSafetyToFalse, Off
+    SetTimer setMouseBackSafetyToFalse, Off
+    global mouseForwardSafetyTrigger := false
+    global mouseBackSafetyTrigger := false
+    global isInFastRewindMode := false
+    
+    ; Send the native cross-monitor move shortcut
+    SendInput, #+{Right}
+    
+    ; Wait until both buttons are physically released so nothing repeats
+    KeyWait, XButton1
+    KeyWait, XButton2
+}
 
 setMouseBackSafetyToFalse:
     mouseBackSafetyTrigger := false 
@@ -25,8 +52,14 @@ setMouseForwardSafetyToFalse:
     }
 return 
 
-$xbutton2::
-    send {XButton2}
+$*XButton2::
+    ; Check if XButton1 is already held down physically
+    if (GetKeyState("XButton1", "P")) {
+        moveUnderCursorOrActiveWindow()
+        return
+    }
+
+    Send {XButton2}
     if (mouseForwardSafetyTrigger) {
         Send {Left}
         mouseForwardSafetyTrigger := false 
@@ -39,8 +72,13 @@ $xbutton2::
     SetTimer setMouseForwardSafetyToFalse, 350
 return
 
+$*XButton1::
+    ; Check if XButton2 is already held down physically
+    if (GetKeyState("XButton2", "P")) {
+        moveUnderCursorOrActiveWindow()
+        return
+    }
 
-XButton1::
     if (mouseBackSafetyTrigger) {
         send {XButton1}
         mouseBackSafetyTrigger := false 
@@ -48,7 +86,7 @@ XButton1::
     }
     mouseBackSafetyTrigger := true 
     SetTimer setMouseBackSafetyToFalse, 420
-Return
+return
 
 ^!t::
     run cmd.exe, C:\
