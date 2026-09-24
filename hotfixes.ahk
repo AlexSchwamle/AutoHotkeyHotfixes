@@ -1,4 +1,5 @@
-﻿; Need admin mode to send Win+Shift+Right to move windows across elevated programs like on screen keyboard 
+﻿#SingleInstance Force
+; Need admin mode to send Win+Shift+Right to move windows across elevated programs like on screen keyboard 
 if !A_IsAdmin
 {
     MsgBox, 48, Must Run As Admin, Hotfixes.ahk must be ran as an admin to move elevated programs. Attempting to automatically do it now.
